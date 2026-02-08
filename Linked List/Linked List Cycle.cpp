@@ -4,14 +4,13 @@ using namespace std;
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        while(head) {
-            if(Nodes.find(head) != Nodes.end()) return true;
-            Nodes.insert(head);
-            head = head->next;
+        ListNode *hare = head, *tortoise = head;
+
+        while(hare && hare->next) {
+            hare = hare->next->next;
+            tortoise = tortoise->next;
+            if(tortoise == hare) return true;
         }
         return false;
     }
-
-private:
-    unordered_set<ListNode*> Nodes;
 };
